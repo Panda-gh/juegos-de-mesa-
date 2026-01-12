@@ -1,0 +1,193 @@
+:root {
+    --red: #ff3b3b;
+    --green: #00c853;
+    --yellow: #ffd700;
+    --blue: #2962ff;
+    --bg: #eceff1;
+    --border-color: #333;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    touch-action: manipulation;
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#ludo-board {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    grid-template-rows: repeat(15, 1fr);
+    width: 90vmin;
+    height: 90vmin;
+    background: white;
+    border: 3px solid var(--border-color);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Celdas Generales */
+.cell {
+    position: relative;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Zonas de Inicio (Bases) */
+.home-base { border: none; }
+.home-base.red { background: var(--red); }
+.home-base.green { background: var(--green); }
+.home-base.yellow { background: var(--yellow); }
+.home-base.blue { background: var(--blue); }
+
+/* Casillas de Camino */
+.path { background: white; }
+
+/* Casillas de Entrada a Meta (Coloreadas) */
+.path-red { background: var(--red); }
+.path-green { background: var(--green); }
+.path-yellow { background: var(--yellow); }
+.path-blue { background: var(--blue); }
+
+/* Centro (Meta) */
+.center-goal {
+    grid-column: 7 / 10;
+    grid-row: 7 / 10;
+    border: 2px solid var(--border-color);
+    z-index: 5;
+    /* Usamos ángulos exactos para que cada color ocupe 90 grados */
+    background: conic-gradient(
+        var(--green) 0deg 45deg, 
+        var(--yellow) 45deg 135deg, 
+        var(--blue) 135deg 225deg, 
+        var(--red) 225deg 315deg,
+        var(--green) 315deg 360deg   
+    );
+}
+/* Fichas */
+.piece {
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    position: absolute;
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+    cursor: grab;
+}
+.piece.red { background: var(--red); }
+.piece.green { background: var(--green); }
+.piece.yellow { background: var(--yellow); }
+.piece.blue { background: var(--blue); }
+.piece:active { transform: scale(1.1); cursor: grabbing; }
+
+/* Panel de Control */
+#controls-panel {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    gap: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.dice-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#dice-val {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+#roll-btn {
+    padding: 8px 16px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 5px;
+    border: 1px solid #ccc;
+}
+.color-dot.red { background: var(--red); }
+.color-dot.green { background: var(--green); }
+.color-dot.yellow { background: var(--yellow); }
+.color-dot.blue { background: var(--blue); }
+
+@media (min-width: 768px) {
+    #game-container {
+        flex-direction: row;
+    }
+    #ludo-board {
+        width: 70vmin;
+        height: 70vmin;
+    }
+}
+
+/* Espacio blanco dentro de la base de color */
+.inner-base {
+    background: white;
+    grid-column: span 4;
+    grid-row: span 4;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+}
+
+/* Los círculos donde se colocan las fichas inicialmente */
+.piece-slot {
+    border-radius: 50%;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f9f9f9;
+}
+/* Efecto para fichas que pueden moverse */
+.piece.selectable {
+    cursor: pointer;
+    box-shadow: 0 0 15px 5px white;
+    animation: pulse 1s infinite;
+    z-index: 20;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ludo Juego</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ludo-board"></div>
+        
+        <div id="controls-panel">
+            <div class="dice-box">
+                <div id="dice-val">🎲</div>
+                <button id="roll-btn">Lanzar</button>
+            </div>
+            <div class="player-info">
+                <div id="status" style="font-weight: bold; margin-bottom: 10px; color: #333;">Conectando...</div>
+                
+                <p>Tu color: <span id="player-color" class="color-dot"></span></p>
+                <p>Turno: <span id="turn-color" class="color-dot red"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
