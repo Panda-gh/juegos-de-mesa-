@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ludo Juego</title>
+    <title>Ludo para jugar :v</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,11 +16,24 @@
                 <button id="roll-btn">Lanzar</button>
             </div>
             <div class="player-info">
-                <div id="status" style="font-weight: bold; margin-bottom: 10px; color: #333;">Conectando...</div>
-                
+                <div id="status" style="font-weight: bold; margin-bottom: 10px; color: #333; min-height: 1.2em;">Conectando...</div>
                 <p>Tu color: <span id="player-color" class="color-dot"></span></p>
-                <p>Turno: <span id="turn-color" class="color-dot red"></span></p>
+                </div>
+        </div>
+    </div>
+
+    <button id="toggle-chat-btn">💬 Chat</button>
+    
+    <div id="chat-container" class="hidden">
+        <div id="chat-header">
+            <span>Chat de Sala</span>
+            <button id="close-chat-btn">×</button>
+        </div>
+        <div id="chat-messages">
             </div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Escribe un mensaje..." autocomplete="off">
+            <button id="send-chat-btn">Enviar</button>
         </div>
     </div>
 
