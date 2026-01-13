@@ -173,8 +173,13 @@ socket.on('pieceCaptured', ({ capturedPieceId, capturedPieceColor }) => {
 
 socket.on('turnUpdate', (color) => {
     currentTurnColor = color;
-    document.getElementById('turn-display').innerText = color.toUpperCase();
-    document.getElementById('turn-display').className = `color-dot ${color}`;
+    const turnDot = document.getElementById('turn-dot');
+    turnDot.className = `color-dot ${color}`;
+    turnDot.innerText = ""; // Limpiamos cualquier texto que se haya colado
+
+    const turnText = document.getElementById('turn-text');
+    turnText.innerText = color.toUpperCase();
+    turnText.style.color = "black"; // Para que no se confunda
     
     // Habilitar botón solo si es mi turno
     rollBtn.disabled = (myColor !== color);
