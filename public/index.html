@@ -11,14 +11,26 @@
         <div id="ludo-board"></div>
         
         <div id="controls-panel">
+            <div id="timer-container"></div>
+                <div id="timer-bar"></div>
+            </div>
+
             <div class="dice-box">
                 <div id="dice-val">🎲</div>
-                <button id="roll-btn">Lanzar</button>
+                <button id="roll-btn" disabled>Lanzar</button>
             </div>
+
             <div class="player-info">
-                <div id="status" style="font-weight: bold; margin-bottom: 10px; color: #333; min-height: 1.2em;">Conectando...</div>
-                <p>Tu color: <span id="player-color" class="color-dot"></span></p>
+                <div id="status">Conectando...</div>
+                <div id="lobby-status">
+                    <div class="led-item" data-color="red"><span class="led"></span> Rojo</div>
+                    <div class="led-item" data-color="green"><span class="led"></span> Verde</div>
+                    <div class="led-item" data-color="yellow"><span class="led"></span> Amarillo</div>
+                    <div class="led-item" data-color="blue"><span class="led"></span> Azul</div>
                 </div>
+                <p>Turno de: <span id="turn-display">---</span></p>
+                <p>Tu color: <span id="player-color" class="color-dot"></span></p>
+            </div>    
         </div>
     </div>
 

@@ -291,3 +291,56 @@ body {
     transition: background 0.2s;
 }
 #send-chat-btn:hover { background: #1e50cb; }
+
+#lobby-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.led-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #666;
+}
+
+.led {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #bbb; /* Color apagado (gris) */
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+/* Clases que pondremos con JS */
+.led-item.connected[data-color="red"] .led { background: #ff0000; box-shadow: 0 0 8px #ff0000; }
+.led-item.connected[data-color="green"] .led { background: #00ff00; box-shadow: 0 0 8px #00ff00; }
+.led-item.connected[data-color="yellow"] .led { background: #ffff00; box-shadow: 0 0 8px #ffff00; }
+.led-item.connected[data-color="blue"] .led { background: #0000ff; box-shadow: 0 0 8px #0000ff; }
+.led-item.connected { color: #000; }
+
+#timer-container {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+#timer-bar {
+    width: 100%;
+    height: 100%;
+    background: var(--green);
+    transition: width 1s linear, background-color 0.3s;
+}
+
+#timer-bar.warning { background: var(--red); }
