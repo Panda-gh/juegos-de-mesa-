@@ -42,21 +42,36 @@ io.on('connection', (socket) => {
 
     socket.on('rollDice', (roomId) => {
         const room = rooms[roomId];
-        const value = Math.floor(Math.random() * 6) + 1;
-        io.to(roomId).emit('diceResult', { value, playerId: socket.id });
+        if (!room || room.players.length === 0) return;
+    
+        // SEGURIDAD: Verificar si el que lanza es el dueño del turno
+        const currentPlayer = room.players[room.turnIndex];
+        
+        if (currentPlayer && currentPlayer.id === socket.id) {
+            const value = Math.floor(Math.random() * 6) + 1;
+            io.to(roomId).emit('diceResult', { 
+                value, 
+                playerId: socket.id,
+                color: currentPlayer.color 
+            });
+            console.log(`Jugador ${currentPlayer.color} lanzó un ${value}`);
+        } else {
+            console.log(`Intento de trampa: ${socket.id} intentó lanzar sin ser su turno.`);
+        }
     });
 
     socket.on('passTurn', (roomId) => {
         const room = rooms[roomId];
-        if (room && room.players.length > 0) {
+        if (!room || room.players.length === 0) return;
+    
+        // SEGURIDAD: Solo el jugador actual o el sistema (si añades tiempo) pueden pasar turno
+        const currentPlayer = room.players[room.turnIndex];
+        
+        if (currentPlayer && currentPlayer.id === socket.id) {
             room.turnIndex = (room.turnIndex + 1) % room.players.length;
             const nextColor = room.players[room.turnIndex].color;
             io.to(roomId).emit('turnUpdate', nextColor);
         }
-    });
-
-    socket.on('chatMessage', (data) => {
-        io.to(data.roomId).emit('chatMessage', data);
     });
 
     socket.on('disconnecting', () => {
