@@ -133,13 +133,14 @@ body {
     font-weight: bold;
 }
 
+/* Esto asegura que el punto sea SOLO un punto y no contenga el texto */
 .color-dot {
     display: inline-block;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    margin-left: 5px;
-    border: 1px solid #ccc;
+    vertical-align: middle; /* Lo alinea con el texto de al lado */
+    margin-right: 8px;      /* Separa el punto de la palabra */
 }
 .color-dot.red { background: var(--red); }
 .color-dot.green { background: var(--green); }
